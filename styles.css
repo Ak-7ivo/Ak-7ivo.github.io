@@ -1,0 +1,42 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  background-image: url(https://images.pexels.com/photos/2909261/pexels-photo-2909261.jpeg);
+  background-size: cover;
+
+  
+}
+
+header {
+  padding: 50px;
+  border-bottom: 100%;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.icone {
+  height: 50px;
+  width: auto;
+}
+
+li{
+  padding-right: 50px;
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-family: Arial, Helvetica, sans-serif;
+}
