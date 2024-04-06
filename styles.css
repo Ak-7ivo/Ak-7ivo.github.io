@@ -1,42 +1,111 @@
-* {
+*{
   padding: 0;
   margin: 0;
 }
 
 body{
-  background-image: url(https://images.pexels.com/photos/2909261/pexels-photo-2909261.jpeg);
-  background-size: cover;
-
+  display: grid;
   
+
+  & header{
+    background: #4C0033;
+    box-shadow: 0 0 25px 25px none;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+
+    & li{
+      display: inline;
+      padding-left: 25px;
+
+      & a{
+        text-decoration: none;
+        color: #E80F88;
+        font-family: fantasy;
+      }
+    }
+
+  }
+
+  & main{
+    background: linear-gradient(0deg, #E80F88 ,#4C0033);
+    height: 80vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    & .presentacion {
+
+      & h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 100px;
+        font-family: fantasy;
+        color: #E80F88;
+        text-shadow: 25px 25px 25px #4C0033;
+      }
+
+      & div{
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        & button{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 20px;
+          background-color: #E80F88;
+          text-shadow: white;
+          font-family: fantasy;
+          width: 100px;
+          height: 40px;
+          border: none;
+          border-radius: 25px;
+          box-shadow: 0px 0px 25px 25px #E80F88;
+          margin-top: 50px;
+          color: #4C0033;
+        }
+        
+      }
+
+    }
+
+    & .cuerpo {
+
+
+
+      & h1 {
+        -webkit-text-stroke: .1px #E80F88;
+        font-family: fantasy;
+        color: #AF0171;
+        text-shadow: 0px 0px 25px #E80F88;
+      }
+
+    }
+
+  }
+
+  & footer{
+    background: #E80F88;
+    height: 10vh;
+  }
+
 }
 
-header {
-  padding: 50px;
-  border-bottom: 100%;
-}
-
-nav ul {
-  display: flex;
-  align-items: center;
-}
-
-.nav-item {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-.icone {
+.button:hover{
+  width: 125px;
   height: 50px;
-  width: auto;
 }
 
-li{
-  padding-right: 50px;
-  list-style: none;
-}
-
-a{
-  text-decoration: none;
-  color: rgb(255, 255, 255);
-  font-family: Arial, Helvetica, sans-serif;
+.button:active{
+  background-color: #4C0033;
+  box-shadow: 0 0 25px 25px #4C0033;
+  color: #E80F88;
 }
