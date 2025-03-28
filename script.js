@@ -4,10 +4,16 @@ let currentEditIndex = -1;
 function displayProducts() {
     const productList = document.getElementById("productList");
     productList.innerHTML = "";
+    
+    let lowStockFound = false; // Variable para verificar si hay productos con stock bajo
 
     products.forEach((product, index) => {
         const row = document.createElement("tr");
         row.classList.toggle("low-stock", product.quantity <= product.minStock);
+
+        if (product.quantity <= product.minStock) {
+            lowStockFound = true; // Si el stock de un producto está bajo, se activa el aviso
+        }
 
         row.innerHTML = `
             <td>${product.name}</td>
@@ -22,6 +28,14 @@ function displayProducts() {
         `;
         productList.appendChild(row);
     });
+
+    // Mostrar el mensaje de aviso si hay productos con stock bajo
+    const lowStockAlert = document.getElementById("lowStockAlert");
+    if (lowStockFound) {
+        lowStockAlert.style.display = "block"; // Muestra el mensaje de alerta si hay productos con stock bajo
+    } else {
+        lowStockAlert.style.display = "none"; // Oculta el mensaje si no hay productos con stock bajo
+    }
 }
 
 function searchProduct() {
@@ -118,5 +132,7 @@ function useProduct(index) {
     }
 }
 
-document.getElementById("addProductBtn").addEventListener("click", openEditModal);
-window.onload = displayProducts;
+// Mensaje de alerta para productos con stock bajo
+window.onload = function() {
+    displayProducts();
+}
