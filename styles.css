@@ -1,86 +1,64 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
-}
-
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 20px;
-}
-
-input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    margin-top: 20px;
 }
 
 button {
+    margin: 20px;
     padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 button:hover {
     background-color: #45a049;
 }
 
-table {
+input[type="text"], input[type="number"] {
+    margin: 5px 0;
+    padding: 8px;
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    box-sizing: border-box;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-    text-align: left;
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
 }
 
 th, td {
     padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
 }
 
 th {
     background-color: #f2f2f2;
 }
 
-button.delete {
-    background-color: #f44336;
+tr:hover {
+    background-color: #f1f1f1;
 }
 
-button.delete:hover {
-    background-color: #e53935;
+.low-stock {
+    background-color: #ffeb3b;
 }
 
-button.edit {
-    background-color: #ff9800;
-}
-
-button.edit:hover {
-    background-color: #fb8c00;
-}
-
-button.use {
-    background-color: #2196F3;
-}
-
-button.use:hover {
-    background-color: #1e88e5;
+.low-stock td {
+    color: red;
+    font-weight: bold;
 }
 
 .modal {
@@ -92,18 +70,17 @@ button.use:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
     padding-top: 60px;
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: #fefefe;
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 400px;
-    border-radius: 10px;
 }
 
 .close {
@@ -118,13 +95,4 @@ button.use:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-.low-stock {
-    background-color: #ffeb3b;
-}
-
-.low-stock td {
-    color: red;
-    font-weight: bold;
 }
