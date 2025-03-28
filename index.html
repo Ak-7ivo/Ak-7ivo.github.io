@@ -1,35 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ak-7ivo</title>
+    <title>Gestión de Stock de Cocina</title>
     <link rel="stylesheet" href="styles.css">
-    
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="Proyectos">Proyectos</a></li>
-                <li><a href="Servios">Servios</a></li>
-                <li><a href="Sobre-mi">Sombre mi</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <div class="presentacion">
-            <h1>Ak-7ivo</h1>
-            <div>
-                <button class="button">Contacto</button>
-            </div>
-        </div>
-        <div class="cuerpo">
-            <h1>Elegir nunca fue mas simple y facil</h1>
-        </div>
-    </main>
-    <footer>
+    <div class="container">
+        <h1>Gestión de Stock de Cocina</h1>
+        
+        <label for="search">Buscar:</label>
+        <input type="text" id="search" placeholder="Buscar producto..." oninput="filtrarLista()">
+        
+        <table id="stockTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Unidad</th>
+                    <th>Stock Mínimo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="stockList">
+                <!-- Los productos se llenarán aquí dinámicamente -->
+            </tbody>
+        </table>
 
-    </footer>
+        <button id="addProductButton">Agregar Producto</button>
+        <button id="generateListButton">Generar Lista de Compras</button>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2 id="modalTitle">Agregar Producto</h2>
+            <label for="productName">Nombre:</label>
+            <input type="text" id="productName" required>
+            <label for="productQuantity">Cantidad:</label>
+            <input type="number" id="productQuantity" required>
+            <label for="productUnit">Unidad:</label>
+            <input type="text" id="productUnit" required>
+            <label for="productStock">Stock Mínimo:</label>
+            <input type="number" id="productStock" required>
+            <button onclick="guardarProducto()">Guardar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
