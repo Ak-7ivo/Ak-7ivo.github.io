@@ -1,86 +1,113 @@
-let productos = [];
-
-document.getElementById('addProductButton').addEventListener('click', abrirModal);
-document.getElementById('generateListButton').addEventListener('click', generarListaCompras);
-
-function abrirModal() {
-    document.getElementById('modal').style.display = 'flex';
-    document.getElementById('modalTitle').textContent = 'Agregar Producto';
-    document.getElementById('productName').value = '';
-    document.getElementById('productQuantity').value = '';
-    document.getElementById('productUnit').value = '';
-    document.getElementById('productStock').value = '';
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
 }
 
-function cerrarModal() {
-    document.getElementById('modal').style.display = 'none';
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-function guardarProducto() {
-    const nombre = document.getElementById('productName').value;
-    const cantidad = document.getElementById('productQuantity').value;
-    const unidad = document.getElementById('productUnit').value;
-    const stockMinimo = document.getElementById('productStock').value;
-
-    if (!nombre || !cantidad || !unidad || !stockMinimo) {
-        alert('Por favor, complete todos los campos.');
-        return;
-    }
-
-    productos.push({ nombre, cantidad: parseFloat(cantidad), unidad, stockMinimo: parseFloat(stockMinimo) });
-    actualizarTabla();
-    cerrarModal();
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-function actualizarTabla() {
-    const tableBody = document.getElementById('stockList');
-    tableBody.innerHTML = '';
-
-    productos.forEach((producto, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${producto.nombre}</td>
-            <td>${producto.cantidad}</td>
-            <td>${producto.unidad}</td>
-            <td>${producto.stockMinimo}</td>
-            <td><button class="delete" onclick="eliminarProducto(${index})">Eliminar</button></td>
-        `;
-        tableBody.appendChild(row);
-    });
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-function eliminarProducto(index) {
-    productos.splice(index, 1);
-    actualizarTabla();
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-function filtrarLista() {
-    const filtro = document.getElementById('search').value.toLowerCase();
-    const filteredProductos = productos.filter(producto =>
-        producto.nombre.toLowerCase().includes(filtro)
-    );
-    const tableBody = document.getElementById('stockList');
-    tableBody.innerHTML = '';
-
-    filteredProductos.forEach((producto, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${producto.nombre}</td>
-            <td>${producto.cantidad}</td>
-            <td>${producto.unidad}</td>
-            <td>${producto.stockMinimo}</td>
-            <td><button class="delete" onclick="eliminarProducto(${index})">Eliminar</button></td>
-        `;
-        tableBody.appendChild(row);
-    });
+button:hover {
+    background-color: #45a049;
 }
 
-function generarListaCompras() {
-    let listaCompra = 'Productos a comprar:\n';
-    productos.forEach(producto => {
-        if (producto.cantidad < producto.stockMinimo) {
-            listaCompra += `${producto.nombre}: ${producto.cantidad} ${producto.unidad} (mínimo ${producto.stockMinimo})\n`;
-        }
-    });
-    alert(listaCompra || 'No hay productos para comprar.');
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+button.delete {
+    background-color: #f44336;
+}
+
+button.delete:hover {
+    background-color: #e53935;
+}
+
+button.edit {
+    background-color: #ff9800;
+}
+
+button.edit:hover {
+    background-color: #fb8c00;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
