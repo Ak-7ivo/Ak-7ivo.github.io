@@ -1,111 +1,90 @@
-*{
-  padding: 0;
-  margin: 0;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
 }
 
-body{
-  display: grid;
-  
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-  & header{
-    background: #4C0033;
-    box-shadow: 0 0 25px 25px none;
-    height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
+h1 {
+    text-align: center;
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f1f1f1;
+}
+
+button.delete {
+    background-color: #dc3545;
+}
+
+button.delete:hover {
+    background-color: #c82333;
+}
+
+.modal {
+    display: none;
+    position: fixed;
     top: 0;
-
-    & li{
-      display: inline;
-      padding-left: 25px;
-
-      & a{
-        text-decoration: none;
-        color: #E80F88;
-        font-family: fantasy;
-      }
-    }
-
-  }
-
-  & main{
-    background: linear-gradient(0deg, #E80F88 ,#4C0033);
-    height: 80vh;
-    display: grid;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-
-    & .presentacion {
-
-      & h1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 100px;
-        font-family: fantasy;
-        color: #E80F88;
-        text-shadow: 25px 25px 25px #4C0033;
-      }
-
-      & div{
-        
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-
-        & button{
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 20px;
-          background-color: #E80F88;
-          text-shadow: white;
-          font-family: fantasy;
-          width: 100px;
-          height: 40px;
-          border: none;
-          border-radius: 25px;
-          box-shadow: 0px 0px 25px 25px #E80F88;
-          margin-top: 50px;
-          color: #4C0033;
-        }
-        
-      }
-
-    }
-
-    & .cuerpo {
-
-
-
-      & h1 {
-        -webkit-text-stroke: .1px #E80F88;
-        font-family: fantasy;
-        color: #AF0171;
-        text-shadow: 0px 0px 25px #E80F88;
-      }
-
-    }
-
-  }
-
-  & footer{
-    background: #E80F88;
-    height: 10vh;
-  }
-
 }
 
-.button:hover{
-  width: 125px;
-  height: 50px;
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    width: 300px;
 }
 
-.button:active{
-  background-color: #4C0033;
-  box-shadow: 0 0 25px 25px #4C0033;
-  color: #E80F88;
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
 }
