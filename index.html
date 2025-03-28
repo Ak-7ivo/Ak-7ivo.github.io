@@ -3,53 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Stock de Cocina</title>
+    <title>Gestión de Productos</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Gestión de Stock de Cocina</h1>
 
-        <input type="text" id="search" placeholder="Buscar productos..." oninput="searchProduct()">
-        
-        <table id="productTable">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th>Unidad</th>
-                    <th>Stock Mínimo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="productList">
-                <!-- Aquí se mostrarán los productos -->
-            </tbody>
-        </table>
+    <div id="lowStockAlert" style="display: none; background-color: #ffeb3b; padding: 10px; color: red; font-weight: bold; text-align: center;">
+        ¡Alerta! Hay productos con stock bajo que necesitan ser comprados.
+    </div>
 
-        <button id="addProductBtn" onclick="openEditModal()">Agregar Producto</button>
-        
-        <!-- Modal de edición de producto -->
-        <div id="editModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeEditModal()">&times;</span>
-                <h2 id="modalTitle">Agregar Producto</h2>
-                <label for="productName">Nombre:</label>
-                <input type="text" id="productName" required>
+    <h1>Gestión de Productos</h1>
+    <button onclick="openEditModal()">Agregar Producto</button>
+    <input type="text" id="search" onkeyup="searchProduct()" placeholder="Buscar producto...">
 
-                <label for="productQuantity">Cantidad:</label>
-                <input type="number" id="productQuantity" required>
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Unidad</th>
+                <th>Stock Mínimo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="productList">
+            <!-- Aquí se mostrarán los productos -->
+        </tbody>
+    </table>
 
-                <label for="productUnit">Unidad:</label>
-                <input type="text" id="productUnit" required>
-
-                <label for="productMinStock">Stock Mínimo:</label>
-                <input type="number" id="productMinStock" required>
-
-                <button id="saveProductBtn" onclick="saveProduct()">Guardar</button>
-            </div>
+    <!-- Modal para agregar/editar productos -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2 id="modalTitle">Agregar Producto</h2>
+            <label for="productName">Nombre del Producto</label>
+            <input type="text" id="productName" placeholder="Nombre del producto">
+            <label for="productQuantity">Cantidad</label>
+            <input type="number" id="productQuantity" placeholder="Cantidad">
+            <label for="productUnit">Unidad</label>
+            <input type="text" id="productUnit" placeholder="Unidad (kg, g, unidad)">
+            <label for="productMinStock">Stock Mínimo</label>
+            <input type="number" id="productMinStock" placeholder="Stock mínimo">
+            <button onclick="saveProduct()">Guardar</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
