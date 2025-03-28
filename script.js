@@ -1,113 +1,104 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+let products = [];
+let currentEditIndex = -1;
+
+function displayProducts() {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+
+    products.forEach((product, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${product.name}</td>
+            <td>${product.quantity}</td>
+            <td>${product.unit}</td>
+            <td>${product.minStock}</td>
+            <td>
+                <button class="edit" onclick="editProduct(${index})">Editar</button>
+                <button class="delete" onclick="deleteProduct(${index})">Eliminar</button>
+            </td>
+        `;
+        productList.appendChild(row);
+    });
 }
 
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+function searchProduct() {
+    const searchQuery = document.getElementById("search").value.toLowerCase();
+    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery));
+    displayFilteredProducts(filteredProducts);
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+function displayFilteredProducts(filteredProducts) {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+
+    filteredProducts.forEach((product, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${product.name}</td>
+            <td>${product.quantity}</td>
+            <td>${product.unit}</td>
+            <td>${product.minStock}</td>
+            <td>
+                <button class="edit" onclick="editProduct(${index})">Editar</button>
+                <button class="delete" onclick="deleteProduct(${index})">Eliminar</button>
+            </td>
+        `;
+        productList.appendChild(row);
+    });
 }
 
-input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+function openEditModal() {
+    document.getElementById("editModal").style.display = "block";
+    document.getElementById("modalTitle").textContent = "Agregar Producto";
+    document.getElementById("productName").value = "";
+    document.getElementById("productQuantity").value = "";
+    document.getElementById("productUnit").value = "";
+    document.getElementById("productMinStock").value = "";
+    currentEditIndex = -1;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+function closeEditModal() {
+    document.getElementById("editModal").style.display = "none";
 }
 
-button:hover {
-    background-color: #45a049;
+function saveProduct() {
+    const name = document.getElementById("productName").value;
+    const quantity = parseFloat(document.getElementById("productQuantity").value);
+    const unit = document.getElementById("productUnit").value;
+    const minStock = parseFloat(document.getElementById("productMinStock").value);
+
+    if (!name || !quantity || !unit || !minStock) {
+        alert("Por favor, completa todos los campos.");
+        return;
+    }
+
+    if (currentEditIndex === -1) {
+        products.push({ name, quantity, unit, minStock });
+    } else {
+        products[currentEditIndex] = { name, quantity, unit, minStock };
+    }
+
+    closeEditModal();
+    displayProducts();
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+function editProduct(index) {
+    const product = products[index];
+    document.getElementById("editModal").style.display = "block";
+    document.getElementById("modalTitle").textContent = "Editar Producto";
+    document.getElementById("productName").value = product.name;
+    document.getElementById("productQuantity").value = product.quantity;
+    document.getElementById("productUnit").value = product.unit;
+    document.getElementById("productMinStock").value = product.minStock;
+    currentEditIndex = index;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-    text-align: left;
+function deleteProduct(index) {
+    if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+        products.splice(index, 1);
+        displayProducts();
+    }
 }
 
-th, td {
-    padding: 10px;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-button.delete {
-    background-color: #f44336;
-}
-
-button.delete:hover {
-    background-color: #e53935;
-}
-
-button.edit {
-    background-color: #ff9800;
-}
-
-button.edit:hover {
-    background-color: #fb8c00;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 10px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+document.getElementById("addProductBtn").addEventListener("click", openEditModal);
+window.onload = displayProducts;
