@@ -7,6 +7,8 @@ function displayProducts() {
 
     products.forEach((product, index) => {
         const row = document.createElement("tr");
+        row.classList.toggle("low-stock", product.quantity <= product.minStock);
+
         row.innerHTML = `
             <td>${product.name}</td>
             <td>${product.quantity}</td>
@@ -15,6 +17,7 @@ function displayProducts() {
             <td>
                 <button class="edit" onclick="editProduct(${index})">Editar</button>
                 <button class="delete" onclick="deleteProduct(${index})">Eliminar</button>
+                <button class="use" onclick="useProduct(${index})">Usar</button>
             </td>
         `;
         productList.appendChild(row);
@@ -33,6 +36,8 @@ function displayFilteredProducts(filteredProducts) {
 
     filteredProducts.forEach((product, index) => {
         const row = document.createElement("tr");
+        row.classList.toggle("low-stock", product.quantity <= product.minStock);
+
         row.innerHTML = `
             <td>${product.name}</td>
             <td>${product.quantity}</td>
@@ -41,6 +46,7 @@ function displayFilteredProducts(filteredProducts) {
             <td>
                 <button class="edit" onclick="editProduct(${index})">Editar</button>
                 <button class="delete" onclick="deleteProduct(${index})">Eliminar</button>
+                <button class="use" onclick="useProduct(${index})">Usar</button>
             </td>
         `;
         productList.appendChild(row);
@@ -97,6 +103,18 @@ function deleteProduct(index) {
     if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
         products.splice(index, 1);
         displayProducts();
+    }
+}
+
+function useProduct(index) {
+    const product = products[index];
+    const usedQuantity = prompt(`¿Cuántas unidades de "${product.name}" usaste?`, 1);
+
+    if (usedQuantity && !isNaN(usedQuantity) && usedQuantity > 0) {
+        product.quantity -= parseFloat(usedQuantity);
+        displayProducts();
+    } else {
+        alert("Cantidad no válida.");
     }
 }
 
