@@ -1,18 +1,18 @@
-let products = [];
+let products = JSON.parse(localStorage.getItem("products")) || [];
 let currentEditIndex = -1;
 
 function displayProducts() {
     const productList = document.getElementById("productList");
     productList.innerHTML = "";
     
-    let lowStockFound = false; // Variable para verificar si hay productos con stock bajo
+    let lowStockFound = false;
 
     products.forEach((product, index) => {
         const row = document.createElement("tr");
         row.classList.toggle("low-stock", product.quantity <= product.minStock);
 
         if (product.quantity <= product.minStock) {
-            lowStockFound = true; // Si el stock de un producto está bajo, se activa el aviso
+            lowStockFound = true;
         }
 
         row.innerHTML = `
@@ -29,12 +29,11 @@ function displayProducts() {
         productList.appendChild(row);
     });
 
-    // Mostrar el mensaje de aviso si hay productos con stock bajo
     const lowStockAlert = document.getElementById("lowStockAlert");
     if (lowStockFound) {
-        lowStockAlert.style.display = "block"; // Muestra el mensaje de alerta si hay productos con stock bajo
+        lowStockAlert.style.display = "block";
     } else {
-        lowStockAlert.style.display = "none"; // Oculta el mensaje si no hay productos con stock bajo
+        lowStockAlert.style.display = "none";
     }
 }
 
@@ -98,6 +97,7 @@ function saveProduct() {
         products[currentEditIndex] = { name, quantity, unit, minStock };
     }
 
+    localStorage.setItem("products", JSON.stringify(products)); // Guarda los datos en LocalStorage
     closeEditModal();
     displayProducts();
 }
@@ -116,6 +116,7 @@ function editProduct(index) {
 function deleteProduct(index) {
     if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
         products.splice(index, 1);
+        localStorage.setItem("products", JSON.stringify(products)); // Guarda los cambios en LocalStorage
         displayProducts();
     }
 }
@@ -126,6 +127,7 @@ function useProduct(index) {
 
     if (usedQuantity && !isNaN(usedQuantity) && usedQuantity > 0) {
         product.quantity -= parseFloat(usedQuantity);
+        localStorage.setItem("products", JSON.stringify(products)); // Guarda los cambios en LocalStorage
         displayProducts();
     } else {
         alert("Cantidad no válida.");
