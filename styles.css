@@ -75,6 +75,14 @@ button.edit:hover {
     background-color: #fb8c00;
 }
 
+button.use {
+    background-color: #2196F3;
+}
+
+button.use:hover {
+    background-color: #1e88e5;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -110,4 +118,13 @@ button.edit:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.low-stock {
+    background-color: #ffeb3b;
+}
+
+.low-stock td {
+    color: red;
+    font-weight: bold;
 }
