@@ -9,11 +9,10 @@
 <body>
     <div class="container">
         <h1>Gestión de Stock de Cocina</h1>
+
+        <input type="text" id="search" placeholder="Buscar productos..." oninput="searchProduct()">
         
-        <label for="search">Buscar:</label>
-        <input type="text" id="search" placeholder="Buscar producto..." oninput="filtrarLista()">
-        
-        <table id="stockTable">
+        <table id="productTable">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -23,31 +22,34 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="stockList">
-                <!-- Los productos se llenarán aquí dinámicamente -->
+            <tbody id="productList">
+                <!-- Aquí se mostrarán los productos -->
             </tbody>
         </table>
 
-        <button id="addProductButton">Agregar Producto</button>
-        <button id="generateListButton">Generar Lista de Compras</button>
-    </div>
+        <button id="addProductBtn" onclick="openEditModal()">Agregar Producto</button>
+        
+        <!-- Modal de edición de producto -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeEditModal()">&times;</span>
+                <h2 id="modalTitle">Agregar Producto</h2>
+                <label for="productName">Nombre:</label>
+                <input type="text" id="productName" required>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="cerrarModal()">&times;</span>
-            <h2 id="modalTitle">Agregar Producto</h2>
-            <label for="productName">Nombre:</label>
-            <input type="text" id="productName" required>
-            <label for="productQuantity">Cantidad:</label>
-            <input type="number" id="productQuantity" required>
-            <label for="productUnit">Unidad:</label>
-            <input type="text" id="productUnit" required>
-            <label for="productStock">Stock Mínimo:</label>
-            <input type="number" id="productStock" required>
-            <button onclick="guardarProducto()">Guardar</button>
+                <label for="productQuantity">Cantidad:</label>
+                <input type="number" id="productQuantity" required>
+
+                <label for="productUnit">Unidad:</label>
+                <input type="text" id="productUnit" required>
+
+                <label for="productMinStock">Stock Mínimo:</label>
+                <input type="number" id="productMinStock" required>
+
+                <button id="saveProductBtn" onclick="saveProduct()">Guardar</button>
+            </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
